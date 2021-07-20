@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:27:43 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/07/20 10:46:53 by pweinsto         ###   ########.fr       */
+/*   Updated: 2021/07/20 11:44:22 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ char	*get_next_line(int fd)
 	static int		static_check;
 
 	if (static_check == 1 || fd < 0 || BUFFER_SIZE < 1)
+	{
+		static_check = 0;
 		return (0);
+	}
 	if (!temp)
 		temp = (char *)malloc(sizeof(char) * BUFFER_SIZE);
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -41,7 +44,7 @@ char	*get_next_line(int fd)
 				check = 1;
 			nlpos++;	
 		}
-		ft_bzero(buff, BUFFER_SIZE);
+		ft_bzero(buff, BUFFER_SIZE + 1);
 	}
 	free(buff);
 	if (temp[0] == 0)
@@ -64,5 +67,6 @@ char	*get_next_line(int fd)
 	static_check = 1;
 	line = ft_strdup(temp);
 	free(temp);
+	temp = 0;
 	return (line);
 }
