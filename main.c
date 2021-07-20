@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 12:23:01 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/07/17 16:10:43 by pweinsto         ###   ########.fr       */
+/*   Updated: 2021/07/20 10:42:02 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 	fd = open("tester/files/empty", O_RDONLY);
 	while (i <= 15)
 	{
-		buf = get_next_line(fd);
+		buf = get_next_line(1000);
 		printf("fd: %s", buf);
 		free(buf);
 		i++;

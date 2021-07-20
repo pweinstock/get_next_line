@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:27:43 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/07/17 16:19:09 by pweinsto         ###   ########.fr       */
+/*   Updated: 2021/07/20 10:46:53 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_next_line(int fd)
 	while (check == 0)
 	{
 		rt = read(fd, buff, BUFFER_SIZE);
-		if (rt == 0)
+		if (rt <= 0)
 			break;
 		temp = ft_strjoin(temp, buff);
 		nlpos = 0;
@@ -45,7 +45,11 @@ char	*get_next_line(int fd)
 	}
 	free(buff);
 	if (temp[0] == 0)
+	{
+		free(temp);
+		temp = 0;
 		return (0);
+	}
 	nlpos = 0;
 	while (temp[nlpos] != 0)
 	{	
