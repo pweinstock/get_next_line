@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 12:23:01 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/07/20 11:37:24 by pweinsto         ###   ########.fr       */
+/*   Updated: 2021/07/20 15:56:19 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	main(void)
 	int		i;
 
 	i = 0;
-	fd = open("tester/files/43_no_nl", O_RDONLY);
+	fd = open("tester/files/alternate_line_nl_with_nl", O_RDONLY);
 	while (i <= 15)
 	{
 		buf = get_next_line(fd);
-		printf("fd: %sx", buf);
+		printf("fd: %s", buf);
 		free(buf);
 		i++;
 	}

@@ -6,47 +6,66 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:27:43 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/07/20 11:44:22 by pweinsto         ###   ########.fr       */
+/*   Updated: 2021/07/20 16:19:03 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+void	*ft_calloc(size_t count, size_t size)
 {
-	char			*buff;
-	static char		*temp;
-	int				check = 0;
-	int				nlpos;
-	char			*line;
-	int				rt;
-	static int		static_check;
+	void	*ptr;
 
-	if (static_check == 1 || fd < 0 || BUFFER_SIZE < 1)
-	{
-		static_check = 0;
+	ptr = malloc(count * size);
+	if (!ptr)
 		return (0);
-	}
-	if (!temp)
-		temp = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	ft_bzero(buff, BUFFER_SIZE + 1);
+	ft_bzero(ptr, count * size);
+	return (ptr);
+}
+
+char	*ft_readnjoin(int fd, char *buff, char *temp)
+{
+	int	check;
+	int	rt;
+	int i;
+
+	rt = 0;
+	check = 0;
 	while (check == 0)
 	{
 		rt = read(fd, buff, BUFFER_SIZE);
 		if (rt <= 0)
 			break;
 		temp = ft_strjoin(temp, buff);
-		nlpos = 0;
-		while (buff[nlpos])
+		i = 0;
+		while (buff[i])
 		{
-			if (buff[nlpos] == '\n')
+			if (buff[i] == '\n')
 				check = 1;
-			nlpos++;	
+			i++;	
 		}
 		ft_bzero(buff, BUFFER_SIZE + 1);
 	}
 	free(buff);
+	return (temp);
+}
+
+char	*get_next_line(int fd)
+{
+	char			*buff;
+	static char		*temp;
+	int				nlpos;
+	char			*line;
+	static int		static_check;
+
+	if (static_check == 1 || fd < 0 || BUFFER_SIZE < 1)
+		return (0);
+	if (!temp)
+		temp = (char *)ft_calloc(BUFFER_SIZE, sizeof(char));
+	buff = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!temp || !buff)
+		return (0);
+	temp = ft_readnjoin(fd, buff, temp);
 	if (temp[0] == 0)
 	{
 		free(temp);
@@ -67,6 +86,5 @@ char	*get_next_line(int fd)
 	static_check = 1;
 	line = ft_strdup(temp);
 	free(temp);
-	temp = 0;
 	return (line);
 }

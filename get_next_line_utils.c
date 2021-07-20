@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:43:38 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/07/17 15:17:08 by pweinsto         ###   ########.fr       */
+/*   Updated: 2021/07/20 16:15:27 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	lens2;
 	size_t	i;
 
-	if (!s1 || !s2)
-		return (0);
 	lens1 = ft_strlen(s1);
 	lens2 = ft_strlen(s2);
 	i = 0;
-	ptr = (char *)malloc(sizeof(char) * (lens1 + lens2 + 1));
+	ptr = (char *)ft_calloc(lens1 + lens2 + 1, sizeof(char));
 	if (!ptr)
 		return (0);
 	while (i < lens1)
@@ -62,9 +60,9 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	len = 0;
-	while (/*s1[len] != '\n' && */s1[len] != 0)
+	while (s1[len] != 0)
 		len++;
-	ptr = (char *)malloc((len + 1) * sizeof(char));
+	ptr = (char *)ft_calloc(len + 1, sizeof(char));
 	ft_bzero(ptr, len + 1);
 	if (!ptr)
 		return (0);
