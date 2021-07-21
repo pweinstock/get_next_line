@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:43:38 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/07/20 16:15:27 by pweinsto         ###   ########.fr       */
+/*   Updated: 2021/07/21 11:57:40 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *str)
 		i++;
 	}
 	return (i);
-} 
+}
 
 char	*ft_strjoin(char *s1, char *s2)
 {

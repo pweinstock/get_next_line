@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:27:43 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/07/20 16:19:03 by pweinsto         ###   ########.fr       */
+/*   Updated: 2021/07/21 12:00:05 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_readnjoin(int fd, char *buff, char *temp)
 {
 	int	check;
 	int	rt;
-	int i;
+	int	i;
 
 	rt = 0;
 	check = 0;
@@ -35,14 +35,14 @@ char	*ft_readnjoin(int fd, char *buff, char *temp)
 	{
 		rt = read(fd, buff, BUFFER_SIZE);
 		if (rt <= 0)
-			break;
+			break ;
 		temp = ft_strjoin(temp, buff);
 		i = 0;
 		while (buff[i])
 		{
 			if (buff[i] == '\n')
 				check = 1;
-			i++;	
+			i++;
 		}
 		ft_bzero(buff, BUFFER_SIZE + 1);
 	}
@@ -50,28 +50,22 @@ char	*ft_readnjoin(int fd, char *buff, char *temp)
 	return (temp);
 }
 
-char	*get_next_line(int fd)
+int	ft_empty(char *temp)
 {
-	char			*buff;
-	static char		*temp;
-	int				nlpos;
-	char			*line;
-	static int		static_check;
-
-	if (static_check == 1 || fd < 0 || BUFFER_SIZE < 1)
-		return (0);
-	if (!temp)
-		temp = (char *)ft_calloc(BUFFER_SIZE, sizeof(char));
-	buff = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!temp || !buff)
-		return (0);
-	temp = ft_readnjoin(fd, buff, temp);
 	if (temp[0] == 0)
 	{
 		free(temp);
-		temp = 0;
-		return (0);
+		return (1);
 	}
+	else
+		return (0);
+}
+
+char	*ft_process(char *temp)
+{
+	int		nlpos;
+	char	*line;
+
 	nlpos = 0;
 	while (temp[nlpos] != 0)
 	{	
@@ -83,6 +77,32 @@ char	*get_next_line(int fd)
 		}
 		nlpos++;
 	}
+	return (0);
+}
+
+char	*get_next_line(int fd)
+{
+	char			*buff;
+	static char		*temp;
+	char			*line;
+	static int		static_check;
+
+	if (static_check == 1 || fd < 0 || BUFFER_SIZE < 1)
+		return (0);
+	if (!temp)
+		temp = (char *)ft_calloc(BUFFER_SIZE, sizeof(char));
+	buff = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!temp || !buff)
+		return (0);
+	temp = ft_readnjoin(fd, buff, temp);
+	if (ft_empty(temp) == 1)
+	{
+		temp = 0;
+		return (0);
+	}
+	line = ft_process(temp);
+	if (line)
+		return (line);
 	static_check = 1;
 	line = ft_strdup(temp);
 	free(temp);
