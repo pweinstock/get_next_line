@@ -6,12 +6,13 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 12:23:01 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/07/21 11:55:30 by pweinsto         ###   ########.fr       */
+/*   Updated: 2021/07/21 14:45:44 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+#include <fcntl.h>
 
 int	main(void)
 {

@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:28:15 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/07/21 11:59:10 by pweinsto         ###   ########.fr       */
+/*   Updated: 2021/07/21 14:46:09 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *str);
